@@ -22,7 +22,7 @@ void CLOSE::PushBack(ListNode *node) {
     }
 }
 
-ListNode* CLOSE::GetFront() const {
+ListNode* CLOSE::GetFront() {
     ListNode* a = head_;
     if (a == NULL) {
         return NULL;
@@ -31,7 +31,7 @@ ListNode* CLOSE::GetFront() const {
     }
 }
 
-ListNode* CLOSE::GetBack() const {
+ListNode* CLOSE::GetBack() {
     ListNode* a = head_;
     if(a == NULL) {
         return NULL;
@@ -42,7 +42,7 @@ ListNode* CLOSE::GetBack() const {
     return a;
 }
 
-bool CLOSE::SearchElement(ListNode *element) const {
+bool CLOSE::SearchElement(ListNode *element) {
     ListNode* head = GetFront();
     while((head != element) && (head != NULL)) {
         head = head->next;
@@ -54,8 +54,8 @@ bool CLOSE::SearchElement(ListNode *element) const {
     }
 }
 
-bool CLOSE::operator == (ListNode other) {
-    if ((this->coor_.first == other.coor_.first) && (this->coor_.second == other.coor_.second)) {
+bool CLOSE::operator == (CLOSE other) {
+    if ((this->head_->coor_.first == other.head_->coor_.first) && (this->head_->coor_.second == other.head_->coor_.second)) {
         return true;
     } else {
         return false;

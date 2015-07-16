@@ -15,10 +15,10 @@ public:
     CLOSE();
     ~CLOSE();
     void PushBack(ListNode *node);
-    bool SearchElement(ListNode *element) const;
-    ListNode* GetFront() const;
-    ListNode* GetBack() const;
-    bool operator == (ListNode other);
+    bool SearchElement(ListNode *element);
+    ListNode* GetFront();
+    ListNode* GetBack();
+    bool operator == (CLOSE other);
 };
 
 #endif // CLOSE_H

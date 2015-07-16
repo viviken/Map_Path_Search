@@ -2,6 +2,15 @@
 #define OPEN_H
 #include "map.h"
 
+struct Vertex {
+    int f_value;
+    std::pair<int, int> coor;
+    Vertex* parent;
+    Vertex* BackPointer(Vertex* a) const{
+        return a->parent;
+    }
+};
+
 struct ListNode_ {
     Vertex v;
     ListNode_* next;
@@ -15,8 +24,8 @@ public:
     OPEN();
     ~OPEN();
     void Push(ListNode_ *node);
-    bool SearchElement(ListNode_ *element) const;
-    ListNode_* GetFront() const;
+    bool SearchElement(ListNode_ *element);
+    ListNode_* GetFront();
 };
 
 #endif // OPEN_H

@@ -10,8 +10,7 @@ SOURCES += main.cpp \
     tinystr.cpp \
     tinyxml.cpp \
     tinyxmlerror.cpp \
-    tinyxmlparser.cpp \
-    vertex.cpp
+    tinyxmlparser.cpp
 
 HEADERS += \
     close.h \
@@ -19,6 +18,5 @@ HEADERS += \
     map.h \
     open.h \
     tinystr.h \
-    tinyxml.h \
-    vertex.h
+    tinyxml.h
 

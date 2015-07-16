@@ -11,5 +11,10 @@
 #define CNS_result "result"
 #define CNS_ratio "ratio"
 #define CNS_density "density"
+#define CNS_startx "startx"
+#define CNS_starty "starty"
+#define CNS_finishx "finishx"
+#define CNS_finishy "finishy"
+
 
 #endif // GL_CONST_H

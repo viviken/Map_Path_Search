@@ -152,6 +152,29 @@ bool Map::GetMapFromXML(char* Filename) {
     TiXmlElement *xml_map = 0;
     xml_map = xml_root->FirstChildElement(CNS_map);
 
+    TiXmlElement *xml_startx = 0;
+    TiXmlElement *xml_starty = 0;
+    TiXmlElement *xml_finishx = 0;
+    TiXmlElement *xml_finishy = 0;
+    xml_startx = xml_map->FirstChildElement(CNS_startx);
+    xml_starty = xml_map->FirstChildElement(CNS_starty);
+    xml_finishx = xml_map->FirstChildElement(CNS_finishx);
+    xml_finishy = xml_map->FirstChildElement(CNS_finishy);
+    std::string n2 = xml_startx->GetText();
+    std::string n3 = xml_starty->GetText();
+    std::string m2 = xml_finishx->GetText();
+    std::string m3 = xml_finishy->GetText();
+    std::stringstream str3, str4, str5, str6;
+    str3 << n2;
+    str3 >> this->start.first;
+    str4 << n3;
+    str4 >> this->start.second;
+    str5 << m2;
+    str5 >> this->finish.first;
+    str6 << m3;
+    str6 >> this->finish.second;
+
+
 // Инициализирование матрицы проходимости по заданным в файле данных(высота и ширина).
     TiXmlElement *xml_height = 0;
     TiXmlElement *xml_width = 0;
@@ -217,6 +240,12 @@ bool Map::GetMapFromXML(char* Filename) {
     this->ratio = (this->width * this->height - number_of_zero) / (this->width * this->height);
     return true;
 }
+
+
+void Map::Find_Search(Map map) {
+
+}
+
 
 
 void Map::PrintMap() {
