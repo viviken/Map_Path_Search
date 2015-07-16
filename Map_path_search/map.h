@@ -38,6 +38,7 @@ public:
     std::pair<int, int> start_() {return start;}
     std::pair<int, int> finish_() {return finish;}
     int **grid;
+    std::pair<int, int>& finish__() {return finish;}
 };
 
 #endif // MAP_H

@@ -4,9 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    close.cpp \
     map.cpp \
-    open.cpp \
     tinystr.cpp \
     tinyxml.cpp \
     tinyxmlerror.cpp \
@@ -15,10 +13,8 @@ SOURCES += main.cpp \
     astarsearch.cpp
 
 HEADERS += \
-    close.h \
     gl_const.h \
     map.h \
-    open.h \
     tinystr.h \
     tinyxml.h \
     linkedlist.h \

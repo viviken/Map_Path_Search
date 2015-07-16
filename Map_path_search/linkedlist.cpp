@@ -62,6 +62,16 @@ bool LinkedList::SearchElement(ListNode *element) {
     }
 }
 
+ListNode* LinkedList::FindElement(ListNode *element) {
+    ListNode* head = GetFront();
+    while((head->node->coor != element->node->coor) && (head != NULL)) {
+        head = head->next;
+    }
+    if((head->node->coor == element->node->coor) && (head != NULL)) {
+        return head;
+    }
+}
+
 ListNode *LinkedList::GetFrontAndDelete() {
     ListNode* a = this->head_;
     if (a == NULL) {
@@ -73,6 +83,7 @@ ListNode *LinkedList::GetFrontAndDelete() {
         return b;
     }
 }
+
 
 ListNode* LinkedList::GetFront() {
     ListNode* a = head_;

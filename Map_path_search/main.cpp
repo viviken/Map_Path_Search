@@ -1,4 +1,4 @@
-#include "map.h"
+#include "astarsearch.h"
 
 
 int main(int argc, char* argv[]) {
@@ -19,6 +19,9 @@ int main(int argc, char* argv[]) {
         return 0;
     }
     map.Get_Result_Address(argv[1]);
+    AstarSearch a;
+    Map* b = &map;
+    std::cout << a.Search(b);
     map.PrintMap();
     map.GetRatio();
     map.CreateResult(argv[1]);

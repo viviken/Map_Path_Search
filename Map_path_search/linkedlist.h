@@ -13,8 +13,14 @@ struct Node {
 struct ListNode {
     Node* node;
     ListNode* next;
-//    explicit ListNode() : next(NULL) {};
+    bool operator = (ListNode* other) {
+        this->node->coor = other->node->coor;
+        this->node->g_value = other->node->g_value;
+        this->node->parent = other->node->parent;
+        this->next = other->next;
+    }
 };
+
 
 class LinkedList {
     ListNode *head_;
@@ -24,9 +30,11 @@ public:
     void PushBack(ListNode *nod);
     void PushSort(ListNode *nod);
     bool SearchElement(ListNode *element);
+    ListNode* FindElement(ListNode *element);
     ListNode* GetFront();
     ListNode* GetFrontAndDelete();
     ListNode* GetBack();
+//    bool operator =(ListNode* other);
 };
 
 #endif // LINKEDLIST_H
