@@ -242,12 +242,6 @@ bool Map::GetMapFromXML(char* Filename) {
 }
 
 
-void Map::Find_Search(Map map) {
-
-}
-
-
-
 void Map::PrintMap() {
     for (int i = 0; i < this->height; ++i) {
         for (int j = 0; j < this->width; ++j) {

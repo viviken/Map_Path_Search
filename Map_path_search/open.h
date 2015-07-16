@@ -2,7 +2,7 @@
 #define OPEN_H
 #include "map.h"
 
-struct Vertex {
+struct Vertex { //  Node
     int f_value;
     std::pair<int, int> coor;
     Vertex* parent;

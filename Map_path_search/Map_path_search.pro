@@ -10,7 +10,9 @@ SOURCES += main.cpp \
     tinystr.cpp \
     tinyxml.cpp \
     tinyxmlerror.cpp \
-    tinyxmlparser.cpp
+    tinyxmlparser.cpp \
+    linkedlist.cpp \
+    astarsearch.cpp
 
 HEADERS += \
     close.h \
@@ -18,5 +20,7 @@ HEADERS += \
     map.h \
     open.h \
     tinystr.h \
-    tinyxml.h
+    tinyxml.h \
+    linkedlist.h \
+    astarsearch.h
 

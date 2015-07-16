@@ -12,7 +12,7 @@ OPEN::~OPEN() {
         delete tmpNode;
     }
 }
-// Доделать PUSH.
+// проверять хвост
 void OPEN::Push(ListNode_ *node) {
     ListNode_ *head = GetFront();
     while (head->next->v.f_value > node->v.f_value) {

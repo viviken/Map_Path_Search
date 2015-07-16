@@ -9,20 +9,20 @@
 #include <sstream>
 #include <math.h>
 #include "gl_const.h"
-#include "close.h"
-#include "open.h"
+#include "linkedlist.h"
 
 
 class Map {
 private:
     int height;
     int width;
-    int **grid;
+    //int **grid;
     std::string adds_result;
     double ratio;
     void InitMap(int m, int n);
     std::pair<int, int> start;
     std::pair<int, int> finish;
+
 public:
     Map();
     Map(int n, int m);
@@ -33,7 +33,11 @@ public:
     void GetRatio();
     void CreateResult(char* Filename);
     void Get_Result_Address(char* Route);
-    void Find_Search(Map map);
+    int height_() {return height;}
+    int width_() {return width;}
+    std::pair<int, int> start_() {return start;}
+    std::pair<int, int> finish_() {return finish;}
+    int **grid;
 };
 
 #endif // MAP_H
