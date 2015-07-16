@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
     map.Get_Result_Address(argv[1]);
     AstarSearch a;
     Map* b = &map;
-    std::cout << a.Search(b);
+    bool c = a.Search(b);
     map.PrintMap();
     map.GetRatio();
     map.CreateResult(argv[1]);

@@ -2,7 +2,8 @@
 
 LinkedList::LinkedList() {
     head_->next = NULL;
-    head_->node->coor = std::make_pair(-1, -1);
+    head_->node->coor.first = -1;
+    head_->node->coor.second = -1;
     head_->node->parent = NULL;
     head_->node->g_value = -1;
     head_->node->h_value = -1;
@@ -69,7 +70,7 @@ ListNode* LinkedList::FindElement(ListNode *element) {
     }
     if((head->node->coor == element->node->coor) && (head != NULL)) {
         return head;
-    }
+    } else return NULL;
 }
 
 ListNode *LinkedList::GetFrontAndDelete() {

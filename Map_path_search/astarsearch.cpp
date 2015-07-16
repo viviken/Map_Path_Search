@@ -32,7 +32,7 @@ void AstarSearch::help(ListNode* s, ListNode* s1, long long int infinity, Linked
 
 void AstarSearch::Expand(ListNode* s, long long int infinity, Map* map, LinkedList* CLOSE, LinkedList* OPEN) {
     //ListNode* s1;
-
+/*
     if (-1 < s->node->coor.first + 1 < map->height_()) {
         if (map->grid[s->node->coor.first + 1][s->node->coor.second] == 0) {
             ListNode* s1;
@@ -123,7 +123,7 @@ void AstarSearch::Expand(ListNode* s, long long int infinity, Map* map, LinkedLi
             help(s, s1, infinity, CLOSE, OPEN, cost_d);
             s1->node->parent = s->node;
         }
-    }
+    }*/
 }
 
 bool AstarSearch::Search(Map *map) {
@@ -131,9 +131,11 @@ bool AstarSearch::Search(Map *map) {
     LinkedList* CLOSE;
     LinkedList* OPEN;
     ListNode* s0, goal;
+
+    std::cout << std::endl << map->start_().first << " " << map->start_().second << std::endl;
     s0->node->coor = map->start_();
-    goal.node->coor = map->finish_();
-    s0->node->g_value = 0;
+//    goal.node->coor = map->finish_();
+/*    s0->node->g_value = 0;
     s0->node->h_value = h_cost(s0->node->coor, goal.node->coor);
     OPEN->PushSort(s0);
     while (OPEN->GetFront() != NULL) {
@@ -142,7 +144,7 @@ bool AstarSearch::Search(Map *map) {
 //            RecoveryPath(s0, goal, map);
             ListNode aa = goal;
             while (aa.node->coor != s->node->coor) {
-                //map->grid[aa.node->coor.second][aa.node->coor.first] = 8;
+                map->grid[aa.node->coor.second][aa.node->coor.first] = 8;
                 aa.node = aa.node->parent;
             }
             return true;
@@ -152,7 +154,7 @@ bool AstarSearch::Search(Map *map) {
 
         CLOSE->PushBack(s);
     }
-    return false;
+    return false;*/
 }
 /*
 void AstarSearch::RecoveryPath(ListNode* s, ListNode* goal, Map& map) {

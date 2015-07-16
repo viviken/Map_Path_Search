@@ -13,12 +13,12 @@ struct Node {
 struct ListNode {
     Node* node;
     ListNode* next;
-    bool operator = (ListNode* other) {
+    /*bool operator = (ListNode* other) {
         this->node->coor = other->node->coor;
         this->node->g_value = other->node->g_value;
         this->node->parent = other->node->parent;
         this->next = other->next;
-    }
+    }*/
 };
 
 
