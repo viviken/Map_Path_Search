@@ -2,19 +2,19 @@
 
 LinkedList::LinkedList() {
     head_->next = NULL;
-    head_->node->coor.first = -1;
+    /*head_->node->coor.first = -1;
     head_->node->coor.second = -1;
     head_->node->parent = NULL;
     head_->node->g_value = -1;
-    head_->node->h_value = -1;
+    head_->node->h_value = -1;*/
 }
 
 LinkedList::~LinkedList() {
     ListNode* head = GetFront();
     while (head != NULL) {
-        ListNode* head0 = head;
+        ListNode* head0 = head->next;
         delete head;
-        head = head0->next;
+        head = head0;
     }
 }
 
@@ -27,14 +27,24 @@ void LinkedList::PushBack(ListNode *nod) {
     }
 }
 
-void LinkedList::PushSort(ListNode *nod) {
-    ListNode *head = GetFront();
-    while ((head->next->node->g_value + head->next->node->h_value) >= (nod->node->g_value + nod->node->h_value)) {
+void LinkedList::PushSort(ListNode* nod) {
+    std::cout << "1" << std::endl;
+    ListNode *head = this->GetFront();
+    if (head == NULL) {
+        this->PushBack(nod);
+    } else {
+    std::cout << "2" << std::endl;
+    std::cout << nod->coor.first << " " << nod->coor.second << std::endl;
+    std::cout << nod->g_value << " " << nod->h_value;
+    std::cout << "3" << std::endl;
+    while (((head->next->g_value + head->next->h_value) <= (nod->g_value + nod->h_value)) && head->next != NULL) {
+        std::cout << "a";
         head = head->next;
     }
+
     ListNode* a = head;
     ListNode* c = head->next;
-    while ((head->node->coor != nod->node->coor) && (head != NULL)) {
+    while ((head->coor != nod->coor) && (head != NULL)) {
         head = head->next;
     }
     if (head == NULL) {
@@ -49,14 +59,15 @@ void LinkedList::PushSort(ListNode *nod) {
         a->next = nod;
         nod->next = c;
     }
+    }
 }
 
 bool LinkedList::SearchElement(ListNode *element) {
     ListNode* head = GetFront();
-    while((head->node->coor != element->node->coor) && (head != NULL)) {
+    while((head->coor != element->coor) && (head != NULL)) {
         head = head->next;
     }
-    if((head->node->coor == element->node->coor) && (head != NULL)) {
+    if((head->coor == element->coor) && (head != NULL)) {
         return true;
     } else {
         return false;
@@ -65,10 +76,10 @@ bool LinkedList::SearchElement(ListNode *element) {
 
 ListNode* LinkedList::FindElement(ListNode *element) {
     ListNode* head = GetFront();
-    while((head->node->coor != element->node->coor) && (head != NULL)) {
+    while((head->coor != element->coor) && (head != NULL)) {
         head = head->next;
     }
-    if((head->node->coor == element->node->coor) && (head != NULL)) {
+    if((head->coor == element->coor) && (head != NULL)) {
         return head;
     } else return NULL;
 }

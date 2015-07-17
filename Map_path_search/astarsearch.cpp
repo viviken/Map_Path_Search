@@ -15,15 +15,15 @@ int AstarSearch::h_cost(std::pair<int, int>& s, std::pair<int, int>& f) {
 void AstarSearch::help(ListNode* s, ListNode* s1, long long int infinity, LinkedList* CLOSE, LinkedList* OPEN, int cost) {
     if (CLOSE->SearchElement(s1) == false) {
         if (OPEN->SearchElement(s1) == false) {
-            s1->node->g_value = infinity;
-            if (s1->node->g_value > s->node->g_value + cost) {
-                s1->node->g_value = s->node->g_value + cost;
+            s1->g_value = infinity;
+            if (s1->g_value > s->g_value + cost) {
+                s1->g_value = s->g_value + cost;
                 OPEN->PushSort(s1);
             }
         } else {
             s1 = OPEN->FindElement(s1);
-            if (s1->node->g_value > s->node->g_value + cost) {
-                s1->node->g_value = s->node->g_value + cost;
+            if (s1->g_value > s->g_value + cost) {
+                s1->g_value = s->g_value + cost;
                 OPEN->PushSort(s1);
             }
         }
@@ -31,99 +31,98 @@ void AstarSearch::help(ListNode* s, ListNode* s1, long long int infinity, Linked
 }
 
 void AstarSearch::Expand(ListNode* s, long long int infinity, Map* map, LinkedList* CLOSE, LinkedList* OPEN) {
-    //ListNode* s1;
-/*
-    if (-1 < s->node->coor.first + 1 < map->height_()) {
-        if (map->grid[s->node->coor.first + 1][s->node->coor.second] == 0) {
+
+    if (-1 < s->coor.first + 1 < map->height_()) {
+        if (map->grid[s->coor.first + 1][s->coor.second] == 0) {
             ListNode* s1;
-            s1->node->coor = s->node->coor;
-            ++s1->node->coor.first;
-            s1->node->h_value = h_cost(s1->node->coor, map->finish__());
+            s1->coor = s->coor;
+            ++s1->coor.first;
+            s1->h_value = h_cost(s1->coor, map->finish__());
             help(s, s1, infinity, CLOSE, OPEN, cost_nd);
-            s1->node->parent = s->node;
+            s1->parent = s;
         }
     }
 
-    if (-1 < s->node->coor.first - 1 < map->height_()) {
-        if (map->grid[s->node->coor.first - 1][s->node->coor.second] == 0) {
+    if (-1 < s->coor.first - 1 < map->height_()) {
+        if (map->grid[s->coor.first - 1][s->coor.second] == 0) {
             ListNode* s1;
-            s1->node->coor = s->node->coor;
-            --s1->node->coor.first;
-            s1->node->h_value = h_cost(s1->node->coor, map->finish__());
+            s1->coor = s->coor;
+            --s1->coor.first;
+            s1->h_value = h_cost(s1->coor, map->finish__());
             help(s, s1, infinity, CLOSE, OPEN, cost_nd);
-            s1->node->parent = s->node;
+            s1->parent = s;
         }
     }
 
-    if (-1 < s->node->coor.second + 1 < map->height_()) {
-        if (map->grid[s->node->coor.first][s->node->coor.second + 1] == 0) {
+    if (-1 < s->coor.second + 1 < map->height_()) {
+        if (map->grid[s->coor.first][s->coor.second + 1] == 0) {
             ListNode* s1;
-            s1->node->coor = s->node->coor;
-            ++s1->node->coor.second;
-            s1->node->h_value = h_cost(s1->node->coor, map->finish__());
+            s1->coor = s->coor;
+            ++s1->coor.second;
+            s1->h_value = h_cost(s1->coor, map->finish__());
             help(s, s1, infinity, CLOSE, OPEN, cost_nd);
-            s1->node->parent = s->node;
+            s1->parent = s;
         }
     }
 
-    if (-1 < s->node->coor.second - 1 < map->height_()) {
-        if (map->grid[s->node->coor.first][s->node->coor.second - 1] == 0) {
+    if (-1 < s->coor.second - 1 < map->height_()) {
+        if (map->grid[s->coor.first][s->coor.second - 1] == 0) {
             ListNode* s1;
-            s1->node->coor = s->node->coor;
-            --s1->node->coor.second;
-            s1->node->h_value = h_cost(s1->node->coor, map->finish__());
+            s1->coor = s->coor;
+            --s1->coor.second;
+            s1->h_value = h_cost(s1->coor, map->finish__());
             help(s, s1, infinity, CLOSE, OPEN, cost_nd);
-            s1->node->parent = s->node;
+            s1->parent = s;
         }
     }
 
-    if (-1 < s->node->coor.first + 1 < map->height_() && -1 < s->node->coor.second + 1 < map->height_()) {
-        if (map->grid[s->node->coor.first + 1][s->node->coor.second + 1] == 0) {
+    if (-1 < s->coor.first + 1 < map->height_() && -1 < s->coor.second + 1 < map->height_()) {
+        if (map->grid[s->coor.first + 1][s->coor.second + 1] == 0) {
             ListNode* s1;
-            s1->node->coor = s->node->coor;
-            ++s1->node->coor.first;
-            ++s1->node->coor.second;
-            s1->node->h_value = h_cost(s1->node->coor, map->finish__());
+            s1->coor = s->coor;
+            ++s1->coor.first;
+            ++s1->coor.second;
+            s1->h_value = h_cost(s1->coor, map->finish__());
             help(s, s1, infinity, CLOSE, OPEN, cost_d);
-            s1->node->parent = s->node;
+            s1->parent = s;
         }
     }
 
-    if (-1 < s->node->coor.first - 1 < map->height_() && -1 < s->node->coor.second - 1 < map->height_()) {
-        if (map->grid[s->node->coor.first + 1][s->node->coor.second + 1] == 0) {
+    if (-1 < s->coor.first - 1 < map->height_() && -1 < s->coor.second - 1 < map->height_()) {
+        if (map->grid[s->coor.first + 1][s->coor.second + 1] == 0) {
             ListNode* s1;
-            s1->node->coor = s->node->coor;
-            --s1->node->coor.first;
-            --s1->node->coor.second;
-            s1->node->h_value = h_cost(s1->node->coor, map->finish__());
+            s1->coor = s->coor;
+            --s1->coor.first;
+            --s1->coor.second;
+            s1->h_value = h_cost(s1->coor, map->finish__());
             help(s, s1, infinity, CLOSE, OPEN, cost_d);
-            s1->node->parent = s->node;
+            s1->parent = s;
         }
     }
 
-    if (-1 < s->node->coor.first + 1 < map->height_() && -1 < s->node->coor.second - 1 < map->height_()) {
-        if (map->grid[s->node->coor.first + 1][s->node->coor.second + 1] == 0) {
+    if (-1 < s->coor.first + 1 < map->height_() && -1 < s->coor.second - 1 < map->height_()) {
+        if (map->grid[s->coor.first + 1][s->coor.second + 1] == 0) {
             ListNode* s1;
-            s1->node->coor = s->node->coor;
-            ++s1->node->coor.first;
-            --s1->node->coor.second;
-            s1->node->h_value = h_cost(s1->node->coor, map->finish__());
+            s1->coor = s->coor;
+            ++s1->coor.first;
+            --s1->coor.second;
+            s1->h_value = h_cost(s1->coor, map->finish__());
             help(s, s1, infinity, CLOSE, OPEN, cost_d);
-            s1->node->parent = s->node;
+            s1->parent = s;
         }
     }
 
-    if (-1 < s->node->coor.first - 1 < map->height_() && -1 < s->node->coor.second + 1 < map->height_()) {
-        if (map->grid[s->node->coor.first + 1][s->node->coor.second + 1] == 0) {
+    if (-1 < s->coor.first - 1 < map->height_() && -1 < s->coor.second + 1 < map->height_()) {
+        if (map->grid[s->coor.first + 1][s->coor.second + 1] == 0) {
             ListNode* s1;
-            s1->node->coor = s->node->coor;
-            --s1->node->coor.first;
-            ++s1->node->coor.second;
-            s1->node->h_value = h_cost(s1->node->coor, map->finish__());
+            s1->coor = s->coor;
+            --s1->coor.first;
+            ++s1->coor.second;
+            s1->h_value = h_cost(s1->coor, map->finish__());
             help(s, s1, infinity, CLOSE, OPEN, cost_d);
-            s1->node->parent = s->node;
+            s1->parent = s;
         }
-    }*/
+    }
 }
 
 bool AstarSearch::Search(Map *map) {
@@ -132,20 +131,25 @@ bool AstarSearch::Search(Map *map) {
     LinkedList* OPEN;
     ListNode* s0, goal;
 
+
+    s0->coor = map->start_();
+    goal.coor = map->finish_();
+    s0->g_value = 0;
+
+    s0->h_value = h_cost(s0->coor, goal.coor);
+
     std::cout << std::endl << map->start_().first << " " << map->start_().second << std::endl;
-    s0->node->coor = map->start_();
-//    goal.node->coor = map->finish_();
-/*    s0->node->g_value = 0;
-    s0->node->h_value = h_cost(s0->node->coor, goal.node->coor);
+
     OPEN->PushSort(s0);
-    while (OPEN->GetFront() != NULL) {
+    std::cout << std::endl << map->start_().first << " " << map->start_().second << std::endl;
+/*    while (OPEN->GetFront() != NULL) {
         ListNode* s = OPEN->GetFrontAndDelete();
-        if (s->node->coor == goal.node->coor) {
-//            RecoveryPath(s0, goal, map);
+        if (s->coor == goal.coor) {
+            //RecoveryPath(s0, goal, map);
             ListNode aa = goal;
-            while (aa.node->coor != s->node->coor) {
-                map->grid[aa.node->coor.second][aa.node->coor.first] = 8;
-                aa.node = aa.node->parent;
+            while (aa.coor != s->coor) {
+                map->grid[aa.coor.second][aa.coor.first] = 8;
+                aa = aa.parent;
             }
             return true;
         }
@@ -153,15 +157,14 @@ bool AstarSearch::Search(Map *map) {
         Expand(s, infinity, map, CLOSE, OPEN);
 
         CLOSE->PushBack(s);
-    }
-    return false;*/
+    }*/
+    return false;
 }
-/*
-void AstarSearch::RecoveryPath(ListNode* s, ListNode* goal, Map& map) {
+
+void AstarSearch::RecoveryPath(ListNode* s, ListNode* goal, Map* map) {
     ListNode* a = goal;
-    while (a->node->coor != s->node->coor) {
-        map->grid[a->node->coor.second][a->node->coor.first] = 8;
-        a->node = a->node->parent;
+    while (a->coor != s->coor) {
+        map->grid[a->coor.second][a->coor.first] = 8;
+        a = a->parent;
     }
 }
-*/
