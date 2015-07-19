@@ -25,7 +25,7 @@ struct ListNode {
     ListNode* parent;
     ListNode* next;
 
-    //explicit ListNode() : next(NULL) {};
+//    explicit ListNode() : next(NULL) {};
     ListNode() {
         next = NULL;
         g_value = -1;
@@ -33,13 +33,13 @@ struct ListNode {
         coor = std::make_pair(-1, -1);
         parent = NULL;
     }
-/*
-    void operator = (ListNode* other) {
+
+    ListNode operator = (ListNode* other) {
         this->coor = other->coor;
         this->g_value = other->g_value;
         this->parent = other->parent;
         this->next = other->next;
-    }*/
+    }
 };
 
 

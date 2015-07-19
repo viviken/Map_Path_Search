@@ -1,7 +1,7 @@
 #include "linkedlist.h"
 
 LinkedList::LinkedList() {
-    head_->next = NULL;
+    head_ = NULL;
     /*head_->node->coor.first = -1;
     head_->node->coor.second = -1;
     head_->node->parent = NULL;
@@ -10,15 +10,15 @@ LinkedList::LinkedList() {
 }
 
 LinkedList::~LinkedList() {
-    ListNode* head = GetFront();
-    while (head != NULL) {
-        ListNode* head0 = head->next;
-        delete head;
-        head = head0;
+    //ListNode* head = GetFront();
+    while (head_ != NULL) {
+        ListNode* head0 = head_->next;
+        delete head_;
+        head_ = head0;
     }
 }
 
-void LinkedList::PushBack(ListNode *nod) {
+void LinkedList::PushBack(ListNode* nod) {
     ListNode *back = GetBack();
     if (back != NULL) {
         back->next = nod;

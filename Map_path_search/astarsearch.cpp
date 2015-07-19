@@ -32,7 +32,7 @@ void AstarSearch::help(ListNode* s, ListNode* s1, long long int infinity, Linked
 
 void AstarSearch::Expand(ListNode* s, long long int infinity, Map* map, LinkedList* CLOSE, LinkedList* OPEN) {
 
-    if (-1 < s->coor.first + 1 < map->height_()) {
+    if (-1 < s->coor.first + 1 && s->coor.first + 1 < map->height_()) {
         if (map->grid[s->coor.first + 1][s->coor.second] == 0) {
             ListNode* s1;
             s1->coor = s->coor;
@@ -43,7 +43,7 @@ void AstarSearch::Expand(ListNode* s, long long int infinity, Map* map, LinkedLi
         }
     }
 
-    if (-1 < s->coor.first - 1 < map->height_()) {
+    if (-1 < s->coor.first - 1 && s->coor.first - 1 < map->height_()) {
         if (map->grid[s->coor.first - 1][s->coor.second] == 0) {
             ListNode* s1;
             s1->coor = s->coor;
@@ -54,7 +54,7 @@ void AstarSearch::Expand(ListNode* s, long long int infinity, Map* map, LinkedLi
         }
     }
 
-    if (-1 < s->coor.second + 1 < map->height_()) {
+    if (-1 < s->coor.second + 1 && s->coor.second + 1 < map->height_()) {
         if (map->grid[s->coor.first][s->coor.second + 1] == 0) {
             ListNode* s1;
             s1->coor = s->coor;
@@ -65,7 +65,7 @@ void AstarSearch::Expand(ListNode* s, long long int infinity, Map* map, LinkedLi
         }
     }
 
-    if (-1 < s->coor.second - 1 < map->height_()) {
+    if (-1 < s->coor.second - 1 && s->coor.second - 1 < map->height_()) {
         if (map->grid[s->coor.first][s->coor.second - 1] == 0) {
             ListNode* s1;
             s1->coor = s->coor;
@@ -76,7 +76,7 @@ void AstarSearch::Expand(ListNode* s, long long int infinity, Map* map, LinkedLi
         }
     }
 
-    if (-1 < s->coor.first + 1 < map->height_() && -1 < s->coor.second + 1 < map->height_()) {
+    if (-1 < s->coor.first + 1 && s->coor.first + 1 < map->height_() && -1 < s->coor.second + 1 && s->coor.second + 1 < map->height_()) {
         if (map->grid[s->coor.first + 1][s->coor.second + 1] == 0) {
             ListNode* s1;
             s1->coor = s->coor;
@@ -88,7 +88,7 @@ void AstarSearch::Expand(ListNode* s, long long int infinity, Map* map, LinkedLi
         }
     }
 
-    if (-1 < s->coor.first - 1 < map->height_() && -1 < s->coor.second - 1 < map->height_()) {
+    if (-1 < s->coor.first - 1 && s->coor.first - 1 < map->height_() && -1 < s->coor.second - 1 && s->coor.second - 1 < map->height_()) {
         if (map->grid[s->coor.first + 1][s->coor.second + 1] == 0) {
             ListNode* s1;
             s1->coor = s->coor;
@@ -100,7 +100,7 @@ void AstarSearch::Expand(ListNode* s, long long int infinity, Map* map, LinkedLi
         }
     }
 
-    if (-1 < s->coor.first + 1 < map->height_() && -1 < s->coor.second - 1 < map->height_()) {
+    if (-1 < s->coor.first + 1 && s->coor.first + 1 < map->height_() && -1 < s->coor.second - 1 && s->coor.second - 1 < map->height_()) {
         if (map->grid[s->coor.first + 1][s->coor.second + 1] == 0) {
             ListNode* s1;
             s1->coor = s->coor;
@@ -112,7 +112,7 @@ void AstarSearch::Expand(ListNode* s, long long int infinity, Map* map, LinkedLi
         }
     }
 
-    if (-1 < s->coor.first - 1 < map->height_() && -1 < s->coor.second + 1 < map->height_()) {
+    if (-1 < s->coor.first - 1 && s->coor.first - 1 < map->height_() && -1 < s->coor.second + 1 && s->coor.second + 1 < map->height_()) {
         if (map->grid[s->coor.first + 1][s->coor.second + 1] == 0) {
             ListNode* s1;
             s1->coor = s->coor;
@@ -131,6 +131,8 @@ bool AstarSearch::Search(Map *map) {
     LinkedList* OPEN;
     ListNode* s0, goal;
 
+    std::cout << s0->coor.first << " " << s0->coor.second << std::endl;
+    std::cout << s0->g_value << " " << s0->h_value << std::endl;
 
     s0->coor = map->start_();
     goal.coor = map->finish_();
@@ -138,10 +140,10 @@ bool AstarSearch::Search(Map *map) {
 
     s0->h_value = h_cost(s0->coor, goal.coor);
 
-    std::cout << std::endl << map->start_().first << " " << map->start_().second << std::endl;
+    std::cout << s0->g_value << " " << s0->h_value << std::endl;
 
     OPEN->PushSort(s0);
-    std::cout << std::endl << map->start_().first << " " << map->start_().second << std::endl;
+    std::cout << std::endl << "aaaaaaaaa" << std::endl;
 /*    while (OPEN->GetFront() != NULL) {
         ListNode* s = OPEN->GetFrontAndDelete();
         if (s->coor == goal.coor) {
