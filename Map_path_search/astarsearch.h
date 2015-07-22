@@ -4,8 +4,6 @@
 
 
 class AstarSearch {
-    const int cost_d = 14;
-    const int cost_nd = 10;
 public:
     LinkedList OPEN;
     LinkedList CLOSE;

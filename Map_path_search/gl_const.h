@@ -15,6 +15,7 @@
 #define CNS_starty "starty"
 #define CNS_finishx "finishx"
 #define CNS_finishy "finishy"
-
+#define cost_d 14
+#define cost_nd 10
 
 #endif // GL_CONST_H
