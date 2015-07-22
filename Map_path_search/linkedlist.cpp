@@ -83,25 +83,39 @@ void LinkedList::PushSort(ListNode nod) {
 }
 
 bool LinkedList::SearchElement(ListNode element) {
-    ListNode* head = head_;
+    ListNode* head = this->GetFront();
     if (head == NULL) return false;
-    while((head->coor != element.coor) && (head != NULL)) {
-        head = head->next;
+//    std::cout << this->Size();
+//    std::cout << std::endl << head->coor.second << " " << head->coor.first << std::endl;
+//    std::cout << std::endl << element.coor.second << " " << element.coor.first << std::endl;
+    while (head != NULL) {
+        if (head->coor == element.coor) {
+            break;
+        } else {
+//            if(head == head->next) break;
+            head = head->next;
+//            std::cout << std::endl << head << " " << std::endl;
+        }
     }
-    if (head != NULL) {
-        return true;
-    } else {
+//    std::cout << std::endl << "2.2" << std::endl;
+    if (head == NULL) {
         return false;
-    }
+    } else return true;
 }
 
 ListNode LinkedList::FindElement(ListNode element) {
-    ListNode* head = GetFront();
+    ListNode* head = this->GetFront();
     ListNode h;
-    while((head->coor != element.coor) && (head != NULL)) {
-        head = head->next;
+    if (head == NULL) return h;
+//    std::cout << std::endl << head->coor.second << " " << head->coor.first << std::endl;
+    while (head != NULL) {
+        if (head->coor == element.coor) {
+            break;
+        } else {
+            head = head->next;
+        }
     }
-    if((head->coor == element.coor) && (head != NULL)) {
+    if (head != NULL) {
         h.coor = head->coor;
         h.g_value = head->g_value;
         h.h_value = head->h_value;
@@ -116,21 +130,49 @@ ListNode LinkedList::GetFrontAndDelete() {
     if (a == NULL) {
         return *a;
     } else {
-        this->head_ = a->next;
-        ListNode* b = a;
-        delete a;
-        return *b;
+        if (a->next == NULL) {
+            this->head_ = NULL;
+            ListNode b;
+            b.coor = a->coor;
+            b.g_value = a->g_value;
+            b.h_value = a->h_value;
+            b.next = a->next;
+            b.parent = a->parent;
+            delete a;
+            return b;
+        } else {
+            this->head_ = a->next;
+            ListNode b;
+            b.coor = a->coor;
+            b.g_value = a->g_value;
+            b.h_value = a->h_value;
+            b.next = a->next;
+            b.parent = a->parent;
+            delete a;
+            return b;
+        }
     }
 }
 
+int LinkedList::Size() {
+    ListNode* a = this->GetFront();
+    int k = 0;
+    if (a == NULL) return k;
+    while (a != NULL) {
+        ++k;
+        a = a->next;
+    }
+    return k;
+}
 
 ListNode* LinkedList::GetFront() {
-    ListNode* a = head_;
+    return this->head_;
+/*    ListNode* a = head_;
     if (a == NULL) {
         return NULL;
     } else {
         return a;
-    }
+    }*/
 }
 
 ListNode* LinkedList::GetBack() {

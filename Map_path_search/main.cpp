@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
     a.OPEN.PushSort(goal);
     std::cout << std::endl << "777777777777" << std::endl;
 */
-
+//    map.grid[1][2] = 5;
     map.PrintMap();
 
     //std::cout << std::endl << map.adds;

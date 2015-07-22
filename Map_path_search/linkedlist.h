@@ -13,11 +13,12 @@ struct ListNode {
 //    explicit ListNode() : next(NULL) {};
     ListNode() {
         next = NULL;
-        g_value = -1;
         h_value = -1;
+        g_value = -1;
         coor = std::make_pair(-1, -1);
         parent = NULL;
     }
+
 /*
     ListNode operator = (ListNode other) {
         this->coor = other.coor;
@@ -33,6 +34,7 @@ class LinkedList {
 public:
     LinkedList();
     ~LinkedList();
+    int Size();
     void PushFront(ListNode node);
     void PushSort(ListNode nod);
     bool SearchElement(ListNode element);
