@@ -29,7 +29,7 @@ void LinkedList::PushFront(ListNode node) {
 
 void LinkedList::PushSort(ListNode nod) {
 //    std::cout << "1" << std::endl;
-    ListNode *head = head_;
+    ListNode *head = GetFront();
     if (head == NULL) {
         this->PushFront(nod);
     } else {
@@ -50,45 +50,106 @@ void LinkedList::PushSort(ListNode nod) {
 //            std::cout << "a";
             head = head->next;
         }
-
-//        std::cout << std::endl << "4" << std::endl;
-        ListNode* a = head;
-//        std::cout << std::endl << "5" << std::endl;
-        ListNode* c = head->next;
-//        std::cout << std::endl << "6" << std::endl;
-        while ((head->coor != nod.coor) && (head != NULL)) {
-//            std::cout << std::endl << "655" << std::endl;
-            if (head->next != NULL) {
-                head = head->next;
+//        std::cout << std::endl << "3.1" << std::endl;
+        if (head->next == NULL) {
+//            std::cout << std::endl << "3.2" << std::endl;
+            if ((head->g_value + head->h_value) >= (nod.g_value + nod.h_value)) {
+//                std::cout << std::endl << "3.3" << std::endl;
+                ListNode* tmp = GetFront();
+//                std::cout << std::endl << "3.4" << std::endl;
+                if (tmp != head) {
+                    while (tmp->next != head) {
+                        tmp = tmp->next;
+                    }
+                    ListNode* t = new ListNode;
+                    t->coor = nod.coor;
+                    t->g_value = nod.g_value;
+                    t->h_value = nod.h_value;
+                    t->parent = nod.parent;
+                    tmp->next = t;
+                    t->next = head;
+                } else {
+                    ListNode* t = new ListNode;
+                    t->coor = nod.coor;
+                    t->g_value = nod.g_value;
+                    t->h_value = nod.h_value;
+                    t->parent = nod.parent;
+                    t->next = tmp;
+                    head_ = t;
+                }
+/*                ListNode* t = new ListNode;
+                t->coor = nod.coor;
+                t->g_value = nod.g_value;
+                t->h_value = nod.h_value;
+                t->parent = nod.parent;
+                tmp->next = t;
+                t->next = head;*/
             } else {
-                head = NULL;
-                break;
+                ListNode* t = new ListNode;
+                t->coor = nod.coor;
+                t->g_value = nod.g_value;
+                t->h_value = nod.h_value;
+                t->parent = nod.parent;
+                head->next = t;
+                t->next = NULL;
             }
-        }
-//        std::cout << std::endl << "7" << std::endl;
-        if (head == NULL) {
-            ListNode* tmp = new ListNode;
-            tmp->coor = nod.coor;
-            tmp->g_value = nod.g_value;
-            tmp->h_value = nod.h_value;
-            tmp->parent = nod.parent;
-            a->next = tmp;
-            tmp->next = c;
         } else {
-            ListNode* h = GetFront();
-            while (h->next != head) h = h->next;
-            ListNode* d = head->next;
-            delete head;
-            h->next = d;
-            ListNode* tmp = new ListNode;
-            tmp->coor = nod.coor;
-            tmp->g_value = nod.g_value;
-            tmp->h_value = nod.h_value;
-            tmp->parent = nod.parent;
-            a->next = tmp;
-            tmp->next = c;
+//          std::cout << std::endl << "4" << std::endl;
+            if ((head->g_value + head->h_value) >= (nod.g_value + nod.h_value)) {
+                ListNode* tmp = GetFront();
+                if (tmp != head) {
+                    while (tmp->next != head) tmp = tmp->next;
+                    ListNode* t = new ListNode;
+                    t->coor = nod.coor;
+                    t->g_value = nod.g_value;
+                    t->h_value = nod.h_value;
+                    t->parent = nod.parent;
+                    t->next = head;
+                    tmp->next = t;
+                } else {
+                    ListNode* t = new ListNode;
+                    t->coor = nod.coor;
+                    t->g_value = nod.g_value;
+                    t->h_value = nod.h_value;
+                    t->parent = nod.parent;
+                    t->next = tmp;
+                    head_ = t;
+                }
+            }
+/*
+                ListNode* t = new ListNode;
+                t->coor = nod.coor;
+                t->g_value = nod.g_value;
+                t->h_value = nod.h_value;
+                t->parent = nod.parent;
+                t->next = nod->next;
+                head->next = t;
+                head = head->next;*/
+
+//          ListNode* a = head;
+//          std::cout << std::endl << "5" << std::endl;
+//          ListNode* c = head->next;
+//          std::cout << std::endl << "6" << std::endl;
+            while (head->next != NULL) {
+                if (head->coor == nod.coor) break;
+//              std::cout << std::endl << "655" << std::endl;
+                head = head->next;
+            }
+//          std::cout << std::endl << "7" << std::endl;
+
+            if (head->next != NULL && head->coor == nod.coor) {
+                ListNode* h = GetFront();
+                while (h->next != head) h = h->next;
+                ListNode* d = head->next;
+                delete head;
+                h->next = d;
+            }
+
+            if (head->next == NULL && head->coor == nod.coor) {
+                delete head;
+            }
+
         }
-//        }
     }
 }
 
@@ -99,13 +160,10 @@ bool LinkedList::SearchElement(ListNode element) {
 //    std::cout << std::endl << head->coor.second << " " << head->coor.first << std::endl;
 //    std::cout << std::endl << element.coor.second << " " << element.coor.first << std::endl;
     while (head != NULL) {
-        if (head->coor == element.coor) {
-            break;
-        } else {
-//            if(head == head->next) break;
-            head = head->next;
-//            std::cout << std::endl << head << " " << std::endl;
-        }
+        if (head->coor == element.coor) break;
+//        if(head == head->next) break;
+        head = head->next;
+//        std::cout << std::endl << head << " " << std::endl;
     }
 //    std::cout << std::endl << "2.2" << std::endl;
     if (head == NULL) {
@@ -177,7 +235,7 @@ int LinkedList::Size() {
 
 ListNode* LinkedList::GetFront() {
     return this->head_;
-/*    ListNode* a = head_;
+/*    ListNode* a = this->head_;
     if (a == NULL) {
         return NULL;
     } else {
