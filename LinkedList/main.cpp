@@ -9,9 +9,9 @@ int main() {
     c.coor = std::make_pair(3, 3);
     d.coor = std::make_pair(4, 4);
     g.coor = std::make_pair(5, 5);
-    h.coor = std::make_pair(6, 6);
+    h.coor = std::make_pair(7, 7);
     i.coor = std::make_pair(7, 7);
-    k.coor = std::make_pair(8, 8);
+    k.coor = std::make_pair(7, 7);
     a.g_value = 100;
     a.h_value = 100;
     b.g_value = 50;
@@ -41,11 +41,14 @@ int main() {
     std::cout << std::endl << OPEN.Size() << std::endl;
     OPEN.PushSort(g);
     std::cout << std::endl << OPEN.Size() << std::endl;
-    OPEN.PushSort(k);
-    std::cout << std::endl << OPEN.Size() << std::endl;
+
+
     OPEN.PushSort(i);
     std::cout << std::endl << OPEN.Size() << std::endl;
-    std::cout << std::endl << "aaaaaaaaaaa  " << std::endl;// << OPEN.Size() << std::endl;
+
+
+    OPEN.PushSort(k);
+    std::cout << std::endl << OPEN.Size() << std::endl;
     ListNode e, f;
     e.coor = std::make_pair(1, 1);
 //    e.g_value = 100;

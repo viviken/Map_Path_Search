@@ -115,7 +115,18 @@ void LinkedList::PushSort(ListNode nod) {
                     t->next = tmp;
                     head_ = t;
                 }
+            } else {
+                ListNode* t = new ListNode;
+                t->coor = nod.coor;
+                t->g_value = nod.g_value;
+                t->h_value = nod.h_value;
+                t->parent = nod.parent;
+                t->next = head->next;
+                head->next = t;
+
+                head = head->next->next;
             }
+
 /*
                 ListNode* t = new ListNode;
                 t->coor = nod.coor;
@@ -130,14 +141,14 @@ void LinkedList::PushSort(ListNode nod) {
 //          std::cout << std::endl << "5" << std::endl;
 //          ListNode* c = head->next;
 //          std::cout << std::endl << "6" << std::endl;
-            while (head->next != NULL) {
+            while (head != NULL) {
                 if (head->coor == nod.coor) break;
 //              std::cout << std::endl << "655" << std::endl;
                 head = head->next;
             }
 //          std::cout << std::endl << "7" << std::endl;
 
-            if (head->next != NULL && head->coor == nod.coor) {
+            if (head != NULL && head->coor == nod.coor) {
                 ListNode* h = GetFront();
                 while (h->next != head) h = h->next;
                 ListNode* d = head->next;
@@ -145,9 +156,9 @@ void LinkedList::PushSort(ListNode nod) {
                 h->next = d;
             }
 
-            if (head->next == NULL && head->coor == nod.coor) {
-                delete head;
-            }
+//            if (head->next == NULL && head->coor == nod.coor) {
+//                delete head;
+//            }
 
         }
     }
