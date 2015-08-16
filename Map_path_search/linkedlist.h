@@ -17,6 +17,15 @@ struct ListNode {
         coor = std::make_pair(-1, -1);
         parent = NULL;
     }
+/*
+    ListNode operator = (ListNode other) {
+        this->coor = other.coor;
+        this->g_value = other.g_value;
+        this->h_value = other.h_value;
+        this->parent = other.parent;
+        this->next = other.next;
+    }
+*/
 };
 
 

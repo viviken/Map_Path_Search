@@ -148,12 +148,17 @@ void LinkedList::PushSort(ListNode nod) {
             }
 //          std::cout << std::endl << "7" << std::endl;
 
-            if (head != NULL && head->coor == nod.coor) {
+            if (head != NULL) {
                 ListNode* h = GetFront();
                 while (h->next != head) h = h->next;
-                ListNode* d = head->next;
-                delete head;
-                h->next = d;
+                if (head->next == NULL) {
+                    h->next = NULL;
+                    delete head;
+                } else {
+                    ListNode* d = head->next;
+                    delete head;
+                    h->next = d;
+                }
             }
 
 //            if (head->next == NULL && head->coor == nod.coor) {
