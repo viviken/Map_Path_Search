@@ -30,13 +30,14 @@ void AstarSearch::help(ListNode& s, ListNode& s1, long long int infinity, AstarS
                 s1.parent = &s;
                 A->OPEN.PushSort(s1);
 //                std::cout << std::endl << "666" << std::endl;
-            } else A->OPEN.PushSort(s1);
+            }// else A->OPEN.PushSort(s1);
         } else {
 //            std::cout << std::endl << "777" << std::endl;
             s1 = A->OPEN.FindElement(s1);
 //            std::cout << std::endl << "888" << std::endl;
 //            std::cout << std::endl << s1.g_value << " " <<s.g_value << " " << cost << std::endl;
-//            std::cout << std::endl << s1.coor.second << " " << s1.coor.first << std::endl;
+//            std::cout << std::endl << s1.coor.first << " " << s1.coor.second << std::endl;
+//            std::cout << std::endl << s1.parent->coor.first << " " << s1.parent->coor.second <<std::endl;
             if (s1.g_value != -1) {
 //                std::cout << std::endl << "cccccccc" << std::endl;
                 if (s1.g_value > s.g_value + cost) {
@@ -67,7 +68,7 @@ void AstarSearch::Expand(ListNode s, long long int infinity, Map& map, AstarSear
 //            std::cout << std::endl << "000" << std::endl;
             ListNode s1;
             s1.coor = s.coor;
-            s1.coor.first = s1.coor.first + 1;
+            ++s1.coor.first;
             s1.h_value = h_cost(s1.coor, map.finish__());
             help(s, s1, infinity, A, cost_nd);
 //            s1.parent = &s;
@@ -213,15 +214,12 @@ bool AstarSearch::Search(Map& map) {
 //        std::cout << std::endl << "1" << std::endl;
         if (s.coor == goal.coor) {
             std::cout << std::endl << "GOOD END!" << std::endl;
+//            Expand(s, infinity, map, &A);
             RecoveryPath(s, map);
-/*            ListNode aa = goal;
-            while (aa.coor != s.coor) {
-                map.grid[aa.coor.second][aa.coor.first] = 8;
-                aa = *aa.parent;
-            }*/
             return true;
         } else {
 //            std::cout << std::endl << "3" << std::endl;
+//            std::cout << std::endl << s.coor.first << " " << s.coor.second;
             Expand(s, infinity, map, &A);
 //            std::cout << std::endl << "4" << std::endl;
             A.CLOSE.PushFront(s);
@@ -234,6 +232,7 @@ void AstarSearch::RecoveryPath(ListNode& s,  Map& map) {
     std::cout << std::endl << "1" << std::endl;
     ListNode a;
     std::cout << std::endl << "2" << std::endl;
+    std::cout << s.coor.first << " " << s.coor.second << std::endl;
     std::cout << s.parent->coor.first << " " << s.parent->coor.second;
     a.coor = s.parent->coor;
     std::cout << std::endl << "3" << std::endl;
