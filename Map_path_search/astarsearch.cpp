@@ -12,12 +12,12 @@ int AstarSearch::h_cost(std::pair<int, int>& s, std::pair<int, int>& f) {
     return res;
 }
 
-void AstarSearch::help(ListNode& s, ListNode& s1, long long int infinity, AstarSearch* A, int cost) {
+void AstarSearch::help(ListNode& s, ListNode& s1, long long int infinity, AstarSearch& A, int cost) {
 //    std::cout << std::endl << "000" << std::endl;
-    if (A->CLOSE.SearchElement(s1) == false) {
+    if (A.CLOSE.SearchElement(s1) == false) {
 //        std::cout << std::endl << "111" << std::endl;
 //        std::cout << A->OPEN.Size() << std::endl;
-        if (A->OPEN.SearchElement(s1) == false) {
+        if (A.OPEN.SearchElement(s1) == false) {
 //            std::cout << std::endl << "222" << std::endl;
             s1.g_value = infinity;
 //            std::cout << std::endl << "333" << std::endl;
@@ -28,12 +28,12 @@ void AstarSearch::help(ListNode& s, ListNode& s1, long long int infinity, AstarS
 //                std::cout << s1.g_value << " " << s.g_value;
 //                std::cout << std::endl << "555" << std::endl;
                 s1.parent = &s;
-                A->OPEN.PushSort(s1);
+                A.OPEN.PushSort(s1);
 //                std::cout << std::endl << "666" << std::endl;
             }// else A->OPEN.PushSort(s1);
         } else {
 //            std::cout << std::endl << "777" << std::endl;
-            s1 = A->OPEN.FindElement(s1);
+            s1 = A.OPEN.FindElement(s1);
 //            std::cout << std::endl << "888" << std::endl;
 //            std::cout << std::endl << s1.g_value << " " <<s.g_value << " " << cost << std::endl;
 //            std::cout << std::endl << s1.coor.first << " " << s1.coor.second << std::endl;
@@ -44,7 +44,7 @@ void AstarSearch::help(ListNode& s, ListNode& s1, long long int infinity, AstarS
                     s1.g_value = s.g_value + cost;
 //                    std::cout << std::endl << "9" << std::endl;
                     s1.parent = &s;
-                    A->OPEN.PushSort(s1);
+                    A.OPEN.PushSort(s1);
 //                    std::cout << std::endl << "10" << std::endl;
                 }
             } else {
@@ -52,14 +52,14 @@ void AstarSearch::help(ListNode& s, ListNode& s1, long long int infinity, AstarS
                 s1.g_value = s.g_value + cost;
 //                std::cout << std::endl << "2222" << std::endl;
                 s1.parent = &s;
-                A->OPEN.PushSort(s1);
+                A.OPEN.PushSort(s1);
 //                std::cout << std::endl << "3333" << std::endl;
             }
         }
     }
 }
 
-void AstarSearch::Expand(ListNode s, long long int infinity, Map& map, AstarSearch* A) {
+void AstarSearch::Expand(ListNode& s, long long int infinity, Map& map, AstarSearch& A) {
 //    std::cout << std::endl << "0" << std::endl;
 
     if (-1 < s.coor.first + 1 && s.coor.first + 1 < map.width_()) {
@@ -215,12 +215,13 @@ bool AstarSearch::Search(Map& map) {
         if (s.coor == goal.coor) {
             std::cout << std::endl << "GOOD END!" << std::endl;
 //            Expand(s, infinity, map, &A);
-            RecoveryPath(s, map);
+            A.CLOSE.PushFront(s);
+            RecoveryPath(s, map, A);
             return true;
         } else {
 //            std::cout << std::endl << "3" << std::endl;
 //            std::cout << std::endl << s.coor.first << " " << s.coor.second;
-            Expand(s, infinity, map, &A);
+            Expand(s, infinity, map, A);
 //            std::cout << std::endl << "4" << std::endl;
             A.CLOSE.PushFront(s);
         }
@@ -228,15 +229,15 @@ bool AstarSearch::Search(Map& map) {
     return false;
 }
 
-void AstarSearch::RecoveryPath(ListNode& s,  Map& map) {
+void AstarSearch::RecoveryPath(ListNode& s,  Map& map, AstarSearch& A) {
     std::cout << std::endl << "1" << std::endl;
-    ListNode a;
+    ListNode a = A.CLOSE.FindElement(s);
     std::cout << std::endl << "2" << std::endl;
     std::cout << s.coor.first << " " << s.coor.second << std::endl;
     std::cout << s.parent->coor.first << " " << s.parent->coor.second;
-    a.coor = s.parent->coor;
+//    a.coor = s.parent->coor;
     std::cout << std::endl << "3" << std::endl;
-    a.parent = s.parent->parent;
+//    a.parent = s.parent->parent;
     std::cout << std::endl << "4" << std::endl;
     std::cout << a.coor.first << " " << a.coor.second <<std::endl;
     std::cout << a.parent->coor.first << " " << a.parent->coor.second <<std::endl;
